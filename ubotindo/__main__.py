@@ -63,29 +63,27 @@ from ubotindo.modules.helper_funcs.alternate import typing_action
 
 
 PM_START_TEXT = f"""
-Hey there! my name is *{dispatcher.bot.first_name}*.
-Any questions on how to use me? use /help
+➖➖➖➖➖➖➖➖➖➖➖➖➖
+👥 DANH SÁCH NHÓM
 
-Join Our [Group](https://t.me/userbotindo) If You wanna Report Issue 🙂
+1. Vét Máng Group 18+
+🔗 https://t.me/+Tqiqp96qviI2NGQ9
 
-I'm here to make your group management fun and easy!
-I have lots of handy features ☺️ such as :
+2. Xóm Dâm 18+
+🔗 https://t.me/+vIGVdXI1K-YwOGJl
 
-• flood control.         • Note'S keeping system.
-• Warning System.   • Predetermined Filters.
+3. Cybersex Việt Nam 18+
+🔗 https://t.me/+HiV6yYeHaFNmMmM1
 
-*Managed With ❤️ By :* [UserbotIndo Team](https://t.me/userbotindo)
-
-Wanna Add me to your Group? Just click the button below!
+4. Vét Máng Plus 18+
+🔗 https://t.me/+AySCXj6aSVA5ZWEy
+➖➖➖➖➖➖➖➖➖➖➖➖➖
 """
 
 buttons = [
     [
         InlineKeyboardButton(
             text="Add to Group 👥", url="t.me/userbotindobot?startgroup=true"
-        ),
-        InlineKeyboardButton(
-            text="Gban Logs 🚫", url="https://t.me/UserIndoBotBannedLog"
         ),
     ]
 ]
@@ -96,10 +94,7 @@ buttons += [
         InlineKeyboardButton(
             text="Help & Commands ❔",
             url=f"t.me/{dispatcher.bot.username}?start=help",
-        ),
-        InlineKeyboardButton(
-            text="Support Group 🎗️", url="https://t.me/userbotindo"
-        ),
+        )
     ]
 ]
 
@@ -275,7 +270,7 @@ def start(update, context):
 
         else:
             update.effective_message.reply_photo(
-                "https://i.ibb.co/zJdLsyg/Userindobot.png",
+                "https://telegra.ph/file/29d330aa0168178803f1b.jpg",
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
