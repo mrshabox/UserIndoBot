@@ -98,7 +98,7 @@ def gban(update, context):
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Không tìm thấy đối tượng.")
         return
 
     if user_id == OWNER_ID:
@@ -125,7 +125,7 @@ def gban(update, context):
 
     if user_id in (777000, 1087968824):
         message.reply_text(
-            "How can i ban someone that i don't know who is it."
+            "Làm sao tôi có thể cấm một người mà tôi không biết đó là ai."
         )
         return
 
@@ -137,8 +137,7 @@ def gban(update, context):
 
     if not reason:
         message.reply_text(
-            "Please Specified a reason. I won't allow a bare gban :)"
-        )
+            "Vui lòng nêu rõ lý do. Tôi đéo thích ban mà ko có lí do :)"
         return
 
     try:
@@ -148,7 +147,7 @@ def gban(update, context):
         return
 
     if user_chat.type != "private":
-        message.reply_text("That's not a user!")
+        message.reply_text("Đó không phải là một người dùng!")
         return
 
     if user_chat.first_name == "":
@@ -160,7 +159,7 @@ def gban(update, context):
     banner = update.effective_user
     bannerid = banner.id
     bannername = banner.first_name
-    reason = f"{reason} // GBanned by {bannername} banner id: {bannerid}"
+    reason = f"{reason} // Cấm bởi {bannername}"
 
     if gban_db.is_user_gbanned(user_id):
         old_reason = gban_db.update_gban_reason(
@@ -169,12 +168,12 @@ def gban(update, context):
 
         context.bot.sendMessage(
             GBAN_LOGS,
-            "<b>Global Ban Reason Update</b>"
-            "\n<b>Sudo Admin:</b> {}"
-            "\n<b>User:</b> {}"
+            "<b>MỘT BÉ RA ĐẢO (･o･;)</b>"
+         #   "\n<b>Sudo Admin:</b> {}"
+            "\n<b>Tội đồ:</b> {}"
             "\n<b>ID:</b> <code>{}</code>"
-            "\n<b>Previous Reason:</b> {}"
-            "\n<b>New Reason:</b> {}".format(
+            "\n<b>Lý do trước đó:</b> {}"
+            "\n<b>Lý do mới:</b> {}".format(
                 mention_html(banner.id, banner.first_name),
                 mention_html(
                     user_chat.id, user_chat.first_name or "Deleted Account"
@@ -196,22 +195,22 @@ def gban(update, context):
         )
     else:
         message.reply_text(
-            f"<b>Beginning of Global Ban for</b> {mention_html(user_chat.id, user_chat.first_name)}"
-            f"\n<b>With ID</b>: <code>{user_chat.id}</code>"
-            f"\n<b>Reason</b>: <code>{reason or 'No reason given'}</code>",
+            f"<b>Lại một bé nữa ra đảo (o_O)</b>"
+            f"\n<b>Tội đồ</b>: {mention_html(user_chat.id, user_chat.first_name)}"
+            f"\n<b>Lý do</b>: <code>{reason or 'No reason given'}</code>",
             parse_mode=ParseMode.HTML,
         )
 
         context.bot.sendMessage(
             GBAN_LOGS,
-            "<b>New Global Ban</b>"
-            "\n#GBAN"
-            "\n<b>Status:</b> <code>Enforcing</code>"
-            "\n<b>Sudo Admin:</b> {}"
-            "\n<b>User:</b> {}"
+            "<b>MỘT BÉ RA ĐẢO (･o･;)</b>"
+         #   "\n#GBAN"
+            "\n<b>Trạng thái:</b> <code>Đã bị cấm</code>"
+      #      "\n<b>Sudo Admin:</b> {}"
+            "\n<b>Tội đồ:</b> {}"
             "\n<b>ID:</b> <code>{}</code>"
-            "\n<b>Reason:</b> {}".format(
-                mention_html(banner.id, banner.first_name),
+            "\n<b>Lý do:</b> {}".format(
+              #  mention_html(banner.id, banner.first_name),
                 mention_html(user_chat.id, user_chat.first_name),
                 user_chat.id,
                 reason,
@@ -234,12 +233,12 @@ def ungban(update, context):
     args = context.args
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Bạn dường như không đề cập đến một người dùng.")
         return
 
     user_chat = context.bot.get_chat(user_id)
     if user_chat.type != "private":
-        message.reply_text("That's not a user!")
+        message.reply_text("Đó không phải là một người dùng!")
         return
 
     if not gban_db.is_user_gbanned(user_id):
@@ -313,7 +312,7 @@ def gbanlist(update, context):
     for user in banned_users:
         banfile += "[x] {} - {}\n".format(user["name"], user["_id"])
         if user["reason"]:
-            banfile += "Reason: {}\n".format(user["reason"])
+            banfile += "Lý do: {}\n".format(user["reason"])
 
     with BytesIO(str.encode(banfile)) as output:
         output.name = "gbanlist.txt"
@@ -377,7 +376,7 @@ def check_and_ban(update, user_id, should_message=True):
 
             send_message(
                 update.effective_message,
-                f"*Alert! this user was GBanned and have been removed!*\n*Reason*: {greason}",
+                f"*Thông báo! Có thằng ngu bị ban đang cố vào lại kìa!*\n*Đã sút với lí do*: {greason}",
                 parse_mode=ParseMode.MARKDOWN,
             )
             return
@@ -449,7 +448,7 @@ def __user_info__(user_id):
     spmban = spamwtc.get_ban(int(user_id))
     cas_banned = check_cas(user_id)
 
-    text = "<b>Globally banned</b>: {}"
+    text = "<b>Đã sút tổng</b>: {}"
 
     if int(user_id) in DEV_USERS + SUDO_USERS + SUPPORT_USERS:
         return ""
@@ -462,7 +461,7 @@ def __user_info__(user_id):
         if is_gbanned:
             user = gban_db.get_gbanned_user(user_id)
             text += "\n<b>Reason:</b> {}".format(html.escape(user["reason"]))
-            text += "\nAppeal at @botspamgroup if you think it's invalid."
+            text += "\nAppeal at @thayryo if you think it's invalid."
     else:
         text = text.format("No")
     return text
