@@ -206,7 +206,7 @@ def gban(update, context):
             GBAN_LOGS,
             "<b>MỘT BÉ RA ĐẢO (･o･;)</b>"
          #   "\n#GBAN"
-            "\n<b>Trạng thái:</b> <code>Đã bị cấm</code>"
+      #      "\n<b>Trạng thái:</b> <code>Đã bị cấm</code>"
       #      "\n<b>Sudo Admin:</b> {}"
             "\n<b>Tội đồ:</b> {}"
             "\n<b>ID:</b> <code>{}</code>"
@@ -377,7 +377,7 @@ def check_and_ban(update, user_id, should_message=True):
 
             send_message(
                 update.effective_message,
-                f"*Thông báo! Có thằng ngu bị ban đang cố vào lại kìa!*\n*Đã sút với lí do*: {greason}",
+                f"*Thông báo! Có thằng ngu bị ban đang cố vào lại kìa!*\n\n*Đã sút với lí do*: {greason}",
                 parse_mode=ParseMode.MARKDOWN,
             )
             return
