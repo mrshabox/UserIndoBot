@@ -138,6 +138,7 @@ def gban(update, context):
     if not reason:
         message.reply_text(
             "Vui lòng nêu rõ lý do. Tôi đéo thích ban mà ko có lí do :)"
+        )
         return
 
     try:
