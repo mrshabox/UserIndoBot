@@ -196,9 +196,9 @@ def gban(update, context):
         )
     else:
         message.reply_text(
-            f"<b>Lại một bé nữa ra đảo (o_O)</b>"
-            f"\n<b>Tội đồ</b>: {mention_html(user_chat.id, user_chat.first_name)}"
-            f"\n<b>Lý do</b>: <code>{reason or 'No reason given'}</code>",
+            f"<b>❌ MỘT BÉ RA ĐẢO (o_O)</b>"
+            f"\n<b>» Tội đồ</b>: {mention_html(user_chat.id, user_chat.first_name)}"
+            f"\n<b>» Lý do</b>: <code>{reason or 'No reason given'}</code>",
             parse_mode=ParseMode.HTML,
         )
 
