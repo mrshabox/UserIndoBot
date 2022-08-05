@@ -127,14 +127,20 @@ def set_about_bio(update, context):
         user_id = repl_message.from_user.id
         if user_id == message.from_user.id:
             message.reply_text(
-                "Are you looking to change your own ... ?? That 's it."
+                "Bạn đang muốn thay đổi chính mình ... ??."
             )
             return
         elif user_id == context.bot.id and sender.id not in DEV_USERS:
-            message.reply_text("Only DEV USERS can change my information.")
+            message.reply_text("Tủi lồn đòi đặt tiểu sử tao.")
             return
-        elif user_id == 1087968824:
-            message.reply_text("You cannot set anonymous user bio!")
+        elif user_id == SUDO_USERS:
+            message.reply_text("Bạn chưa có tư cách đặt tiểu sử người đó.")
+            return
+        elif sender.id not in DEV_USERS:
+            message.reply_text(
+                    "*Ê {}, mày là ai mà đòi ra lệnh cho tao dị??!*".format(
+                        message.from_user.first_name
+                    )
             return
 
         text = message.text
@@ -147,7 +153,7 @@ def set_about_bio(update, context):
                     {"$set": {'bio': bio[1]}},
                     upsert=True)
                 message.reply_text(
-                    "{} bio has been successfully saved!".format(
+                    "{} tiểu sử đã được lưu thành công!".format(
                         repl_message.from_user.first_name
                     )
                 )
@@ -159,7 +165,7 @@ def set_about_bio(update, context):
                 )
     else:
         message.reply_text(
-            " His bio can only be saved if someone MESSAGE as a REPLY"
+            " Không tìm thấy người bạn cần đặt tiểu sử!"
         )
 
 
